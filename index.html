@@ -11,22 +11,55 @@
 
 <body>
     <header>
-        <div class="d-flex p-2">Weather Dashboard</div>
+        <div class="d-flex p-2 justify-content-center">Weather Dashboard</div>
     </header>
 
     <main class = "container-fluid"> 
+
         <div class = "row">
-            <div class = "col-3 bg-secondary">
-                This box is for the city search
+
+            <div class = "col-3 border-bottom border-dark border-3 bg-secondary">
+
+                <div class = "mb-3" id = "search-box">
+                    <label for = "citySearch" class = "form-label h2 mb-3 ">Search for a city:</label>
+                    <input type = "text" class = "form-control" id = "citySearch" placeholder = "City Name">
+                  </div>
+                  <p class = "error danger"></p>
+                <div class = "mb-3" id = "previous-searches">
+                
+                </div>
+
+                <button type="submit" class="searchBtn btn btn-primary col-12 mb-3">Search</button>
             </div>
             <div class = "col-9 bg-info">
-                This box is for the weather info
+                <div class = "col-12 bg-light ">
+                    This should contain temp, wind, humidity, uv 
+                </div>
+
+                <container class = "row gap-3 align-items-center">
+                
+                    <div class = "col-2 border bg-primary">
+                        monday
+                    </div>
+                    <div class = "col-2 border bg-primary">
+                        tuesday
+                    </div>
+                    <div class = "col-2 border bg-primary">
+                        wednesday       
+                    </div>
+                    <div class = "col-2 border bg-primary">
+                        thursday
+                    </div>
+                    <div class = "col-2 border bg-primary">
+                        friday
+                    </div>
+                </container>
             </div>
         </div>
 
     </main>
 
-<!--Scripts-->
+<!-- Scripts -->
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src = "./assets/js/script.js"></script>
 </body>
