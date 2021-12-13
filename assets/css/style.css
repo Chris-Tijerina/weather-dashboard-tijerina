@@ -5,6 +5,10 @@ html {
     box-sizing: inherit;
   }
 
-#uv-text {
+#city-uv-text {
+  display: inline-flex;
+}
+
+#city-weather-icon {
   display: inline-flex;
 }

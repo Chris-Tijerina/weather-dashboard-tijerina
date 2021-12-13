@@ -80,9 +80,11 @@ var getCityData = function () {
                 month: "numeric",
                 day: "numeric"
             })
-
-
-            $(".city-name").text(data.name + "(" + dateToday + ")");
+            console.log(data.weather[0].icon)
+            var weatherIcon = $("<img id = 'city-weather-icon' src = 'http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png' width='50px' height='50px'>")
+            
+            $(".city-name").text(data.name + " (" + dateToday + ") ");
+            $("#city-weather-icon").replaceWith(weatherIcon);
             $(".city-temp").text("Temperature: " + data.main.temp + "\xB0F");
             $(".city-wind-speed").text("Wind Speed: " + data.wind.speed + " MPH")
             $(".city-hum").text("Humidity: " + data.main.humidity + "%");
@@ -104,7 +106,7 @@ var getCityData = function () {
                     $(".city-uv").text("UV Index: ")
 
                     var uvIndex = data.daily[0].uvi
-                    var indexText = $("<p id ='uv-text'>").text(uvIndex)
+                    var indexText = $("<p id ='city-uv-text'>").text(uvIndex)
 
 
                     console.log(uvIndex)
@@ -112,7 +114,7 @@ var getCityData = function () {
 
                         indexText.addClass("bg-success bg-opacity-75 border border-dark border-1 rounded-pill")
 
-                    } else if (uvIndex >= 3 && uvIndex <= 5) {
+                    } else if (uvIndex > 2 && uvIndex <= 5) {
 
                         indexText.addClass("bg-warning bg-opacity-50 border border-dark border-1 rounded-pill")
 
@@ -125,7 +127,7 @@ var getCityData = function () {
                         indexText.addClass("bg-danger bg-opacity-75 border border-dark border-1 rounded-pill")
 
                     } 
-                    indexText.appendTo("#city-uv")
+                    $("#city-uv-text").replaceWith(indexText)
 
                     dailyWeather(data)
                     previousCities()
@@ -137,6 +139,7 @@ var getCityData = function () {
         });
 }
 
+// create the 5 day future forecast
 var dailyWeather = function(data) {
     var dayElem = $(".daily")
     var dailyDate = new Date();
@@ -151,7 +154,11 @@ var dailyWeather = function(data) {
             month: "numeric",
             day: "numeric"
         })
+
+        var dailyIcon = $("<img class = 'daily-icon' src = 'http://openweathermap.org/img/wn/" + data.daily[dateIndex].weather[0].icon + "@2x.png' width='50px' height='50px'>")
+
         $(dayElem[i]).children(".daily-date").text(dailyDateText)
+        $(dayElem[i]).children(".daily-icon").replaceWith(dailyIcon)
         $(dayElem[i]).children(".daily-temp").text("Temp: " + data.daily[dateIndex].temp.day + "\xB0F")
         $(dayElem[i]).children(".daily-wind").text("Wind: " + data.daily[dateIndex].wind_speed + " MPH")
         $(dayElem[i]).children(".daily-humidity").text("Humidity: " + data.daily[dateIndex].humidity + "%")
