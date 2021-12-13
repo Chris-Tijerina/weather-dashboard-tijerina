@@ -70,6 +70,7 @@ var getCityData = function () {
 
             $(".city-name").text(data.name + "(" + dateToday + ")");
             $(".city-temp").text("Temperature: " + data.main.temp + "\xB0F");
+            $(".city-wind-speed").text("Wind Speed: " + data.wind.speed + " MPH")
             $(".city-hum").text("Humidity: " + data.main.humidity + "%");
             var lat = data.coord.lat;
             var lon = data.coord.lon;
@@ -111,6 +112,8 @@ var getCityData = function () {
 
                     } 
                     indexText.appendTo("#city-uv")
+
+                    dailyWeather(data)
                 })
         })
         .catch(error => {
@@ -119,6 +122,26 @@ var getCityData = function () {
         });
 }
 
+var dailyWeather = function(data) {
+    var dayElem = $(".daily")
+    var dailyDate = new Date();
+
+    for (var i = 0; i < dayElem.length; i++) {
+        let dateIndex = i+1
+        dailyDate.setDate(dailyDate.getDate()+1)
+        
+        var dailyDateText = dailyDate.toLocaleDateString(
+            'en-US', {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric"
+        })
+        $(dayElem[i]).children(".daily-date").text(dailyDateText)
+        $(dayElem[i]).children(".daily-temp").text("Temp: " + data.daily[dateIndex].temp.day + "\xB0F")
+        $(dayElem[i]).children(".daily-wind").text("Wind: " + data.daily[dateIndex].wind_speed + " MPH")
+        $(dayElem[i]).children(".daily-humidity").text("Humidity: " + data.daily[dateIndex].humidity + "%")
+    }
+}
 
 
 // previousCities()
