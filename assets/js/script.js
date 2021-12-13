@@ -3,17 +3,19 @@ var citySearch;
 var lat;
 var lon;
 
-
+// Populating the search history with buttons
 var previousCities = function() {
-var cityHistory = JSON.parse(localStorage.getItem("searchHistory"))
-console.log(cityHistory)
-$("#previous-searches").empty();
-    for (var i = cityHistory.length - 1; i >= 0; i--) {
-        var historyButton = $("<button type='submit'>")
-        .addClass("previousBtn btn btn-secondary col-12 mb-3")
-        .text(cityHistory[i])
-        .appendTo("#previous-searches")
-        .bind("click", historyButtonClick)
+    if (localStorage.getItem("searchHistory")) {
+    var cityHistory = JSON.parse(localStorage.getItem("searchHistory"))
+    console.log(cityHistory)
+    $("#previous-searches").empty();
+        for (var i = cityHistory.length - 1; i >= 0; i--) {
+            var historyButton = $("<button type='submit'>")
+            .addClass("previousBtn btn btn-secondary col-12 mb-3")
+            .text(cityHistory[i])
+            .appendTo("#previous-searches")
+            .bind("click", historyButtonClick)
+        }
     }
 
 }
@@ -24,7 +26,7 @@ $(".searchBtn").on("click", function () {
     citySearch = $("#citySearch").val()
     getCityData()
 })
-
+// search based off the search history buttons
 var historyButtonClick = function() {
         $(".error").text("")
         citySearch = $(this).text()
@@ -83,6 +85,7 @@ var getCityData = function () {
             console.log(data.weather[0].icon)
             var weatherIcon = $("<img id = 'city-weather-icon' src = 'http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png' width='50px' height='50px'>")
             
+            // set text and information for the weather info box 
             $(".city-name").text(data.name + " (" + dateToday + ") ");
             $("#city-weather-icon").replaceWith(weatherIcon);
             $(".city-temp").text("Temperature: " + data.main.temp + "\xB0F");
@@ -91,6 +94,7 @@ var getCityData = function () {
             var lat = data.coord.lat;
             var lon = data.coord.lon;
 
+            //run more detailed API call with lat-lon 
             var fetchDataAgain = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=7600d4fdd9952dcc11a35941ea3373d6")
             fetch(fetchDataAgain)
                 .then(response => {
@@ -108,7 +112,7 @@ var getCityData = function () {
                     var uvIndex = data.daily[0].uvi
                     var indexText = $("<p id ='city-uv-text'>").text(uvIndex)
 
-
+                    //create UV index with color coding 
                     console.log(uvIndex)
                     if (uvIndex <= 2) {
 
@@ -144,6 +148,7 @@ var dailyWeather = function(data) {
     var dayElem = $(".daily")
     var dailyDate = new Date();
 
+    //loop through each day and fill information into static boxes 
     for (var i = 0; i < dayElem.length; i++) {
         let dateIndex = i+1
         dailyDate.setDate(dailyDate.getDate()+1)
@@ -165,5 +170,5 @@ var dailyWeather = function(data) {
     }
 }
 
-
+// populate the search history list on page load
 previousCities()
