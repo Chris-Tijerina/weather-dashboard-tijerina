@@ -12,3 +12,40 @@ html {
 #city-weather-icon {
   display: inline-flex;
 }
+
+.banner {
+  background-image: linear-gradient(to right, blue , navy);
+}
+
+.daily {
+  background-color: rgb(29, 29, 133);
+  color: white;
+  border-radius: 15px;
+}
+
+.daily p {
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 10px;
+  
+}
+
+.forecast {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+}
+
+.weather-info span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.daily-icon, #city-weather-icon {
+  align-items: center;
+  background-color: tan;
+  border-radius: 50%;
+}
+
+.daily-icon {
+  display: block;
+  margin: auto;
+}

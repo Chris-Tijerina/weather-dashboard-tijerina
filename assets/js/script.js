@@ -112,19 +112,19 @@ var getCityData = function () {
                     console.log(uvIndex)
                     if (uvIndex <= 2) {
 
-                        indexText.addClass("bg-success bg-opacity-75 border border-dark border-1 rounded-pill")
+                        indexText.addClass("bg-success bg-opacity-75 border border-dark border-1 p-1 rounded-pill")
 
                     } else if (uvIndex > 2 && uvIndex <= 5) {
 
-                        indexText.addClass("bg-warning bg-opacity-50 border border-dark border-1 rounded-pill")
+                        indexText.addClass("bg-warning bg-opacity-50 border border-dark border-1 p-1 rounded-pill")
 
                     } else if (uvIndex >= 6 && uvIndex <= 7) {
 
-                        indexText.addClass("bg-warning border border-dark border-1 rounded-pill")
+                        indexText.addClass("bg-warning border border-dark border-1 p-1 rounded-pill")
 
                     } else if (uvIndex >= 8 && uvIndex <= 10) {
 
-                        indexText.addClass("bg-danger bg-opacity-75 border border-dark border-1 rounded-pill")
+                        indexText.addClass("bg-danger bg-opacity-75 border border-dark border-1 p-1 rounded-pill")
 
                     } 
                     $("#city-uv-text").replaceWith(indexText)

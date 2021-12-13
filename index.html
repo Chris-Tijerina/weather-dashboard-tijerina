@@ -13,75 +13,79 @@
 
 <body>
     <header>
-        <div class="d-flex p-2 justify-content-center">Weather Dashboard</div>
+        <div class="banner d-flex p-2 justify-content-center h1 text-light text-decoration-underline fw-bold">Weather
+            Dashboard</div>
     </header>
 
     <main class="container-fluid">
 
         <div class="row">
 
-            <div class="col-3 border-bottom border-dark border-3 bg-light">
+            <div class="col-3 bg-light">
 
                 <div class="mb-3" id="search-box">
                     <label for="citySearch" class="form-label h2 mb-3 ">Search for a city:</label>
-                    <input type="text" class="form-control border border-2 border-dark" id="citySearch" placeholder="City Name">
+                    <input type="text" class="form-control border border-2 border-dark" id="citySearch"
+                        placeholder="City Name">
                 </div>
                 <p class="error justify-content-center"></p>
                 <button type="submit" class="searchBtn btn btn-primary col-12 mb-3">Search</button>
-                <div class="mb-3" id="previous-searches">
+                <div class="mb-3 p-2 border-top border-dark border-3" id="previous-searches">
 
                 </div>
 
 
             </div>
-            <div class="col-9 bg-info">
-                <div class="col-12 bg-light weather-info">
-                    <span class = "city-name h2">City Name </span> <img id = "city-weather-icon">
+            <div class="col-9 bg-light p-3">
+                <div class="col-12 bg-light weather-info border border-2 border-dark p-3">
+                    <span class="city-name fs-2 text">City Name </span> <img id="city-weather-icon">
                     <br>
-                    <span class = "city-temp h5">Temperature: </span>
+                    <span class="city-temp fs-4 text">Temperature: </span>
                     <br>
-                    <span class = "city-wind-speed h5">Wind Speed: </span>
+                    <span class="city-wind-speed fs-4 text">Wind Speed: </span>
                     <br>
-                    <span class = "city-hum h5">Humidity: </span>
+                    <span class="city-hum fs-4 text">Humidity: </span>
                     <br>
-                    <span id= "city-uv" class = "h5"> UV Index:
+                    <span id="city-uv" class="fs-4 text"> UV Index:
                         <p id="city-uv-text"></p>
                     </span>
                 </div>
 
-                <container class="row gap-3 justify-space-between">
+                <container class="row gap-3 justify-content-center justify-space-between">
 
-                    <div id="day1" class="daily col-2 border bg-primary justify-content left">
-                        <p class ="daily-date"></p>
-                        <img class = "daily-icon"/>
+                    <span class="forecast h3 mt-3 mb-0">5-day Forecast:</span>
+
+                    <div id="day1" class="daily col-2 border  justify-content left">
+                        <p class="daily-date"></p>
+                        <img class="daily-icon"/>
                         <p class="daily-temp"></p>
                         <p class="daily-wind"></p>
                         <p class="daily-humidity"></p>
                     </div>
-                    <div id="day2" class="daily col-2 border bg-primary justify-content left">
-                        <p class ="daily-date"></p>
-                        <img class = "daily-icon"/>
+                    <div id="day2" class="daily col-2 border  justify-content left">
+                        <p class="daily-date"></p>
+                        <img class="daily-icon"/>
                         <p class="daily-temp"></p>
                         <p class="daily-wind"></p>
                         <p class="daily-humidity"></p>
                     </div>
-                    <div id="day3" class="daily col-2 border bg-primary justify-content left">
-                        <p class ="daily-date"></p>
-                        <img class = "daily-icon"/>
+                    <div id="day3" class="daily col-2 border  justify-content left">
+                        <p class="daily-date"></p>
+                        <img class="daily-icon" />
                         <p class="daily-temp"></p>
                         <p class="daily-wind"></p>
                         <p class="daily-humidity"></p>
                     </div>
-                    <div id="day4" class="daily col-2 border bg-primary justify-content left">
-                        <p class ="daily-date"></p>
-                        <img class = "daily-icon"/>
+                    <div id="day4" class="daily col-2 border justify-content left">
+                        <p class="daily-date"></p>
+                        <img class="daily-icon" />
                         <p class="daily-temp"></p>
                         <p class="daily-wind"></p>
                         <p class="daily-humidity"></p>
                     </div>
-                    <div id="day5" class="daily col-2 border bg-primary justify-content left">
-                        <p class ="daily-date"></p>
-                        <img class = "daily-icon"/>
+                    <div id="day5" class="daily col-2 border justify-content left">
+                        <p class="daily-date"></p>
+                        <img class="daily-icon" />
                         <p class="daily-temp"></p>
                         <p class="daily-wind"></p>
                         <p class="daily-humidity"></p>
