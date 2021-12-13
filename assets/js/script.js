@@ -10,9 +10,10 @@ console.log(cityHistory)
 $("#previous-searches").empty();
     for (var i = cityHistory.length - 1; i >= 0; i--) {
         var historyButton = $("<button type='submit'>")
-        .addClass("searchBtn btn btn-secondary col-12 mb-3")
+        .addClass("previousBtn btn btn-secondary col-12 mb-3")
         .text(cityHistory[i])
         .appendTo("#previous-searches")
+        .bind("click", historyButtonClick)
     }
 
 }
@@ -23,6 +24,13 @@ $(".searchBtn").on("click", function () {
     citySearch = $("#citySearch").val()
     getCityData()
 })
+
+var historyButtonClick = function() {
+        $(".error").text("")
+        citySearch = $(this).text()
+        console.log(citySearch)
+        getCityData()
+}
 
 // save the names of any searched cities to an array
 var setSearchHistory = function () {
