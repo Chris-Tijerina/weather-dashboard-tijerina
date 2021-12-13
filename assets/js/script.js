@@ -62,7 +62,7 @@ var setSearchHistory = function () {
 var getCityData = function () {
     var cityName = citySearch.trim()
     console.log(cityName)
-    var fetchData = fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=7600d4fdd9952dcc11a35941ea3373d6")
+    var fetchData = fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=7600d4fdd9952dcc11a35941ea3373d6")
 
         .then(response => {
             if (response.status >= 200 && response.status <= 299) {
