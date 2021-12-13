@@ -1,8 +1,11 @@
 // Variable pulled from the user input
 var citySearch;
+var lat;
+var lon;
+
 
 // var previousCities = function() {
-    
+
 //     for (i = 0; i < localStorage.length; i++) {
 //         var storageSlot = localStorage.key([i])
 //         $("<button>"+JSON.parse(localStorage.getItem(storageSlot))+"</button>").appendTo ("previous-searches")
@@ -37,13 +40,15 @@ var setSearchHistory = function () {
 }
 
 
+
+
 // call API return data for city
-var getCityData = function() {
-    var cityName = citySearch
+var getCityData = function () {
+    var cityName = citySearch.trim()
     console.log(cityName)
     var fetchData = fetch("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=7600d4fdd9952dcc11a35941ea3373d6")
 
-        .then (response => {
+        .then(response => {
             if (response.status >= 200 && response.status <= 299) {
                 return response.json();
             } else {
@@ -51,28 +56,69 @@ var getCityData = function() {
             }
         })
 
-        .then (data => {
-            console.log("success", data)
-            setSearchHistory()
+        .then(data => {
+            console.log("success", data);
+            setSearchHistory();
+            var date = new Date();
+            var dateToday = date.toLocaleDateString(
+                'en-US', {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric"
+            })
 
-        var lat = data.coord.lat
-        var lon = data.coord.lon
-        console.log(lat, lon)
 
-        temp = data.main.temp
-        wind = data.wind.speed 
-        humid = data.main.humidity
-        console.log (temp, wind, humid)
+            $(".city-name").text(data.name + "(" + dateToday + ")");
+            $(".city-temp").text("Temperature: " + data.main.temp + "\xB0F");
+            $(".city-hum").text("Humidity: " + data.main.humidity + "%");
+            var lat = data.coord.lat;
+            var lon = data.coord.lon;
 
-        $
+            var fetchDataAgain = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=7600d4fdd9952dcc11a35941ea3373d6")
+            fetch(fetchDataAgain)
+                .then(response => {
+                    if (response.status >= 200 && response.status <= 299) {
+                        return response.json();
+                    } else {
+                        throw Error(response.Statustext);
+                    }
+                })
 
+                .then(data => {
+                    console.log("success", data);
+                    $(".city-uv").text("UV Index: ")
+
+                    var uvIndex = data.daily[0].uvi
+                    var indexText = $("<p id ='uv-text'>").text(uvIndex)
+
+
+                    console.log(uvIndex)
+                    if (uvIndex <= 2) {
+
+                        indexText.addClass("bg-success bg-opacity-75 border border-dark border-1 rounded-pill")
+
+                    } else if (uvIndex >= 3 && uvIndex <= 5) {
+
+                        indexText.addClass("bg-warning bg-opacity-50 border border-dark border-1 rounded-pill")
+
+                    } else if (uvIndex >= 6 && uvIndex <= 7) {
+
+                        indexText.addClass("bg-warning border border-dark border-1 rounded-pill")
+
+                    } else if (uvIndex >= 8 && uvIndex <= 10) {
+
+                        indexText.addClass("bg-danger bg-opacity-75 border border-dark border-1 rounded-pill")
+
+                    } 
+                    indexText.appendTo("#city-uv")
+                })
         })
-        .catch (error => {
+        .catch(error => {
             //TODO create alert for error message or paragraph in search div
             $(".error").text("city not found, please check the spelling and try again")
-        }) 
-
-    
+        });
 }
+
+
 
 // previousCities()
