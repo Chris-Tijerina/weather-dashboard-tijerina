@@ -4,16 +4,22 @@ var lat;
 var lon;
 
 
-// var previousCities = function() {
+var previousCities = function() {
+var cityHistory = JSON.parse(localStorage.getItem("searchHistory"))
+console.log(cityHistory)
+$("#previous-searches").empty();
+    for (var i = cityHistory.length - 1; i >= 0; i--) {
+        var historyButton = $("<button type='submit'>")
+        .addClass("searchBtn btn btn-secondary col-12 mb-3")
+        .text(cityHistory[i])
+        .appendTo("#previous-searches")
+    }
 
-//     for (i = 0; i < localStorage.length; i++) {
-//         var storageSlot = localStorage.key([i])
-//         $("<button>"+JSON.parse(localStorage.getItem(storageSlot))+"</button>").appendTo ("previous-searches")
-//     }
-// }
+}
 
 // gather form input data on "click" of the Search Button
 $(".searchBtn").on("click", function () {
+    $(".error").text("")
     citySearch = $("#citySearch").val()
     getCityData()
 })
@@ -114,6 +120,7 @@ var getCityData = function () {
                     indexText.appendTo("#city-uv")
 
                     dailyWeather(data)
+                    previousCities()
                 })
         })
         .catch(error => {
@@ -144,4 +151,4 @@ var dailyWeather = function(data) {
 }
 
 
-// previousCities()
+previousCities()
